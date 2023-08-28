@@ -1,0 +1,12 @@
+apiVersion: azure.contrib.fluxcd.io/v1alpha1
+kind: TemplateSpec
+metadata:
+  labels:
+    app.kubernetes.io/name: templatespec
+    app.kubernetes.io/instance: templatespec-sample
+    app.kubernetes.io/part-of: resource-manager-controller
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: resource-manager-controller
+  name: templatespec-sample
+spec:
+  # TODO(user): Add fields here
