@@ -1,0 +1,12 @@
+apiVersion: azure.contrib.fluxcd.io/v1alpha1
+kind: DeploymentStack
+metadata:
+  labels:
+    app.kubernetes.io/name: deploymentstack
+    app.kubernetes.io/instance: deploymentstack-sample
+    app.kubernetes.io/part-of: resource-manager-controller
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: resource-manager-controller
+  name: deploymentstack-sample
+spec:
+  # TODO(user): Add fields here

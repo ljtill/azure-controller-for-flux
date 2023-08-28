@@ -7,4 +7,14 @@ layout:
 - go.kubebuilder.io/v4
 projectName: resource-manager-controller
 repo: github.com/ljtill/resource-manager-controller
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: contrib.fluxcd.io
+  group: azure
+  kind: DeploymentStack
+  path: github.com/ljtill/resource-manager-controller/api/v1alpha1
+  version: v1alpha1
 version: "3"
