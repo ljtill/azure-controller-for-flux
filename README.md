@@ -1,1 +1,1 @@
-# resource-manager-controller
+# Azure Resource Manager (ARM) Controller for Flux
