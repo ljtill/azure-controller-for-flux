@@ -1,0 +1,8 @@
+---
+apiVersion: azure.contrib.fluxcd.io/v1alpha1
+kind: DeploymentStack
+metadata:
+  name: my-stack
+  namespace: azure-resources
+spec:
+  foo: "bar"
