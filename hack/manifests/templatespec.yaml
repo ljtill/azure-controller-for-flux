@@ -1,0 +1,8 @@
+---
+apiVersion: azure.contrib.fluxcd.io/v1alpha1
+kind: TemplateSpec
+metadata:
+  name: my-spec
+  namespace: azure-resources
+spec:
+  foo: "test"
