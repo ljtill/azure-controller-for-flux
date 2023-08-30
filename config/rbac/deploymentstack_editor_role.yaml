@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/name: clusterrole
     app.kubernetes.io/instance: deploymentstack-editor-role
     app.kubernetes.io/component: rbac
-    app.kubernetes.io/created-by: resource-manager-controller
-    app.kubernetes.io/part-of: resource-manager-controller
+    app.kubernetes.io/created-by: azure-controller-for-flux
+    app.kubernetes.io/part-of: azure-controller-for-flux
     app.kubernetes.io/managed-by: kustomize
   name: deploymentstack-editor-role
 rules:
