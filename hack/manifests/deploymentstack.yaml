@@ -5,4 +5,4 @@ metadata:
   name: my-stack
   namespace: azure-resources
 spec:
-  foo: "test"
+  foo: "bar"
