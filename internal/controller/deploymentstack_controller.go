@@ -24,7 +24,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
-	azurev1alpha1 "github.com/ljtill/resource-manager-controller/api/v1alpha1"
+	azurev1alpha1 "github.com/ljtill/azure-controller-for-flux/api/v1alpha1"
 )
 
 // DeploymentStackReconciler reconciles a DeploymentStack object

@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/name: clusterrolebinding
     app.kubernetes.io/instance: manager-rolebinding
     app.kubernetes.io/component: rbac
-    app.kubernetes.io/created-by: resource-manager-controller
-    app.kubernetes.io/part-of: resource-manager-controller
+    app.kubernetes.io/created-by: azure-controller-for-flux
+    app.kubernetes.io/part-of: azure-controller-for-flux
     app.kubernetes.io/managed-by: kustomize
   name: manager-rolebinding
 roleRef:

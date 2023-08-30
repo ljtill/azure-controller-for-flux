@@ -31,8 +31,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/healthz"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	azurev1alpha1 "github.com/ljtill/resource-manager-controller/api/v1alpha1"
-	"github.com/ljtill/resource-manager-controller/internal/controller"
+	azurev1alpha1 "github.com/ljtill/azure-controller-for-flux/api/v1alpha1"
+	"github.com/ljtill/azure-controller-for-flux/internal/controller"
 	//+kubebuilder:scaffold:imports
 )
 

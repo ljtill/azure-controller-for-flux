@@ -1,4 +1,4 @@
-module github.com/ljtill/resource-manager-controller
+module github.com/ljtill/azure-controller-for-flux
 
 go 1.20
 

@@ -30,7 +30,7 @@ import (
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	azurev1alpha1 "github.com/ljtill/resource-manager-controller/api/v1alpha1"
+	azurev1alpha1 "github.com/ljtill/azure-controller-for-flux/api/v1alpha1"
 	//+kubebuilder:scaffold:imports
 )
 

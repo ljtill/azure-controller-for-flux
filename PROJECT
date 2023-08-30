@@ -5,8 +5,8 @@
 domain: contrib.fluxcd.io
 layout:
 - go.kubebuilder.io/v4
-projectName: resource-manager-controller
-repo: github.com/ljtill/resource-manager-controller
+projectName: azure-controller-for-flux
+repo: github.com/ljtill/azure-controller-for-flux
 resources:
 - api:
     crdVersion: v1
@@ -15,7 +15,7 @@ resources:
   domain: contrib.fluxcd.io
   group: azure
   kind: DeploymentStack
-  path: github.com/ljtill/resource-manager-controller/api/v1alpha1
+  path: github.com/ljtill/azure-controller-for-flux/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -24,6 +24,6 @@ resources:
   domain: contrib.fluxcd.io
   group: azure
   kind: TemplateSpec
-  path: github.com/ljtill/resource-manager-controller/api/v1alpha1
+  path: github.com/ljtill/azure-controller-for-flux/api/v1alpha1
   version: v1alpha1
 version: "3"
