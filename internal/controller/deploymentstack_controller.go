@@ -29,6 +29,7 @@ import (
 
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
+	"sigs.k8s.io/controller-runtime/pkg/builder"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
@@ -63,8 +64,10 @@ func (r *DeploymentStackReconciler) Reconcile(ctx context.Context, req ctrl.Requ
 }
 
 // SetupWithManager sets up the controller with the Manager.
+// Watches for Source Controller and DeploymentStack events
+// TODO: Add OCI Repository support
 func (r *DeploymentStackReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&azurev1alpha1.DeploymentStack{}).
+		For(&azurev1alpha1.DeploymentStack{}, builder.WithPredicates(GitRepositoryRevisionChangePredicate{})).
 		Complete(r)
 }
