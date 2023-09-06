@@ -40,7 +40,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
 	azurev1alpha1 "github.com/ljtill/azure-controller-for-flux/api/v1alpha1"
-	"github.com/ljtill/azure-controller-for-flux/internal/controller"
+	"github.com/ljtill/azure-controller-for-flux/internal/controllers"
 	//+kubebuilder:scaffold:imports
 )
 
@@ -97,14 +97,14 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err = (&controller.DeploymentStackReconciler{
+	if err = (&controllers.DeploymentStackReconciler{
 		Client: mgr.GetClient(),
 		Scheme: mgr.GetScheme(),
 	}).SetupWithManager(mgr); err != nil {
 		setupLog.Error(err, "unable to create controller", "controller", "DeploymentStack")
 		os.Exit(1)
 	}
-	if err = (&controller.TemplateSpecReconciler{
+	if err = (&controllers.TemplateSpecReconciler{
 		Client: mgr.GetClient(),
 		Scheme: mgr.GetScheme(),
 	}).SetupWithManager(mgr); err != nil {
