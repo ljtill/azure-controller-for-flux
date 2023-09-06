@@ -58,7 +58,16 @@ type DeploymentStackReconciler struct {
 func (r *DeploymentStackReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 
-	// TODO(user): your logic here
+	log := ctrl.LoggerFrom(ctx)
+	log.Info("Reconciling DeploymentStack")
+
+	var dplStack azurev1alpha1.DeploymentStack
+
+	// NOTE: Get Azure object
+	err := r.Get(ctx, req.NamespacedName, &dplStack)
+	if err != nil {
+		return ctrl.Result{}, client.IgnoreNotFound(err)
+	}
 
 	return ctrl.Result{}, nil
 }
