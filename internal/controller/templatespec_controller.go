@@ -58,7 +58,16 @@ type TemplateSpecReconciler struct {
 func (r *TemplateSpecReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 
-	// TODO(user): your logic here
+	log := ctrl.LoggerFrom(ctx)
+	log.Info("Reconciling TemplateSpec")
+
+	var tmpSpec azurev1alpha1.TemplateSpec
+
+	// NOTE: Get Azure object
+	err := r.Get(ctx, req.NamespacedName, &tmpSpec)
+	if err != nil {
+		return ctrl.Result{}, client.IgnoreNotFound(err)
+	}
 
 	return ctrl.Result{}, nil
 }
