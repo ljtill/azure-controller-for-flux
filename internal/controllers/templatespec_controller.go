@@ -34,6 +34,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
 	azurev1alpha1 "github.com/ljtill/azure-controller-for-flux/api/v1alpha1"
+	"github.com/ljtill/azure-controller-for-flux/internal/predicates"
 )
 
 // TemplateSpecReconciler reconciles a TemplateSpec object
@@ -77,6 +78,6 @@ func (r *TemplateSpecReconciler) Reconcile(ctx context.Context, req ctrl.Request
 // TODO: Add OCI Repository support
 func (r *TemplateSpecReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&azurev1alpha1.TemplateSpec{}, builder.WithPredicates(GitRepositoryRevisionChangePredicate{})).
+		For(&azurev1alpha1.TemplateSpec{}, builder.WithPredicates(predicates.GitRepositoryRevisionChangePredicate{})).
 		Complete(r)
 }
