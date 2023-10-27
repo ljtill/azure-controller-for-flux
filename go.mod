@@ -3,7 +3,7 @@ module github.com/ljtill/azure-controller-for-flux
 go 1.20
 
 require (
-	github.com/fluxcd/source-controller/api v1.1.0
+	github.com/fluxcd/source-controller/api v1.1.2
 	github.com/onsi/ginkgo/v2 v2.9.5
 	github.com/onsi/gomega v1.27.7
 	k8s.io/apimachinery v0.27.4
