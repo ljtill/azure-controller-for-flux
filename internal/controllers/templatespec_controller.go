@@ -29,12 +29,10 @@ import (
 
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
-	"sigs.k8s.io/controller-runtime/pkg/builder"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
 	azurev1alpha1 "github.com/ljtill/azure-controller-for-flux/api/v1alpha1"
-	"github.com/ljtill/azure-controller-for-flux/internal/predicates"
 )
 
 // TemplateSpecReconciler reconciles a TemplateSpec object
@@ -55,29 +53,18 @@ type TemplateSpecReconciler struct {
 // the user.
 //
 // For more details, check Reconcile and its Result here:
-// - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.15.0/pkg/reconcile
+// - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.16.3/pkg/reconcile
 func (r *TemplateSpecReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 
-	log := ctrl.LoggerFrom(ctx)
-	log.Info("Reconciling TemplateSpec")
-
-	var tmpSpec azurev1alpha1.TemplateSpec
-
-	// NOTE: Get Azure object
-	err := r.Get(ctx, req.NamespacedName, &tmpSpec)
-	if err != nil {
-		return ctrl.Result{}, client.IgnoreNotFound(err)
-	}
+	// TODO(user): your logic here
 
 	return ctrl.Result{}, nil
 }
 
 // SetupWithManager sets up the controller with the Manager.
-// Watches for Source Controller and TemplateSpec events
-// TODO: Add OCI Repository support
 func (r *TemplateSpecReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&azurev1alpha1.TemplateSpec{}, builder.WithPredicates(predicates.GitRepositoryRevisionChangePredicate{})).
+		For(&azurev1alpha1.TemplateSpec{}).
 		Complete(r)
 }
