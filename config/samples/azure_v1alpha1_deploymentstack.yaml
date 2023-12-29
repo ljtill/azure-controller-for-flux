@@ -9,4 +9,14 @@ metadata:
     app.kubernetes.io/created-by: azure-controller-for-flux
   name: deploymentstack-sample
 spec:
-  # TODO(user): Add fields here
+  stackName: deploymentstack
+  deploymentScope: ResourceGroup
+  location: uksouth
+  templatePath: azuredeploy.json
+  denySettingsMode: None
+  sourceRef:
+    kind: GitRepository
+    name: deploymentstack
+    namespace: flux-system
+  interval: 1h
+  retryInterval: 5m

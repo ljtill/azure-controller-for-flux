@@ -34,9 +34,35 @@ spec:
           spec:
             description: DeploymentStackSpec defines the desired state of DeploymentStack
             properties:
-              foo:
-                description: Foo is an example field of DeploymentStack. Edit deploymentstack_types.go
-                  to remove/update
+              denySettingsMode:
+                description: DeploymentStackDenySettingMode defines the desired deny
+                  setting mode of DeploymentStack
+                type: string
+              deploymentScope:
+                description: DeploymentStackScope defines the desired scope of DeploymentStack
+                type: string
+              interval:
+                type: string
+              location:
+                type: string
+              retryInterval:
+                type: string
+              sourceRef:
+                description: DeploymentStackSourceRef defines the desired source reference
+                  of DeploymentStack
+                properties:
+                  kind:
+                    description: DeploymentStackSourceRefKind defines the desired
+                      source reference kind of DeploymentStack
+                    type: string
+                  name:
+                    type: string
+                  namespace:
+                    type: string
+                type: object
+              stackName:
+                type: string
+              templatePath:
                 type: string
             type: object
           status:
