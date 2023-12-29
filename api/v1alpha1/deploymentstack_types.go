@@ -28,16 +28,49 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
-// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
+// DeploymentStackScope defines the desired scope of DeploymentStack
+type DeploymentStackScope string
+
+const (
+	Tenant          DeploymentStackScope = "Tenant"
+	ManagementGroup DeploymentStackScope = "ManagementGroup"
+	Subscription    DeploymentStackScope = "Subscription"
+	ResourceGroup   DeploymentStackScope = "ResourceGroup"
+)
+
+// DeploymentStackDenySettingMode defines the desired deny setting mode of DeploymentStack
+type DeploymentStackDenySettings string
+
+const (
+	None               DeploymentStackDenySettings = "None"
+	DenyDelete         DeploymentStackDenySettings = "DenyDelete"
+	DenyWriteAndDelete DeploymentStackDenySettings = "DenyWriteAndDelete"
+)
+
+// DeploymentStackSourceRefKind defines the desired source reference kind of DeploymentStack
+type DeploymentStackSourceRefKind string
+
+const (
+	GitRepository DeploymentStackSourceRefKind = "GitRepository"
+)
+
+// DeploymentStackSourceRef defines the desired source reference of DeploymentStack
+type DeploymentStackSourceRef struct {
+	Kind      DeploymentStackSourceRefKind `json:"kind,omitempty"`
+	Name      string                       `json:"name,omitempty"`
+	Namespace string                       `json:"namespace,omitempty"`
+}
 
 // DeploymentStackSpec defines the desired state of DeploymentStack
 type DeploymentStackSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
-
-	// Foo is an example field of DeploymentStack. Edit deploymentstack_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	Name          string                      `json:"stackName,omitempty"`
+	Scope         DeploymentStackScope        `json:"deploymentScope,omitempty"`
+	Location      string                      `json:"location,omitempty"`
+	Template      string                      `json:"templatePath,omitempty"`
+	DenySettings  DeploymentStackDenySettings `json:"denySettingsMode,omitempty"`
+	SourceRef     DeploymentStackSourceRef    `json:"sourceRef,omitempty"`
+	Interval      string                      `json:"interval,omitempty"`
+	RetryInterval string                      `json:"retryInterval,omitempty"`
 }
 
 // DeploymentStackStatus defines the observed state of DeploymentStack
