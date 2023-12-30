@@ -28,56 +28,94 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// DeploymentStackScope defines the desired scope of DeploymentStack
-type DeploymentStackScope string
-
-const (
-	Tenant          DeploymentStackScope = "Tenant"
-	ManagementGroup DeploymentStackScope = "ManagementGroup"
-	Subscription    DeploymentStackScope = "Subscription"
-	ResourceGroup   DeploymentStackScope = "ResourceGroup"
-)
-
-// DeploymentStackDenySettingMode defines the desired deny setting mode of DeploymentStack
-type DeploymentStackDenySettings string
-
-const (
-	None               DeploymentStackDenySettings = "None"
-	DenyDelete         DeploymentStackDenySettings = "DenyDelete"
-	DenyWriteAndDelete DeploymentStackDenySettings = "DenyWriteAndDelete"
-)
-
-// DeploymentStackSourceRefKind defines the desired source reference kind of DeploymentStack
-type DeploymentStackSourceRefKind string
-
-const (
-	GitRepository DeploymentStackSourceRefKind = "GitRepository"
-)
-
 // DeploymentStackSourceRef defines the desired source reference of DeploymentStack
 type DeploymentStackSourceRef struct {
-	Kind      DeploymentStackSourceRefKind `json:"kind,omitempty"`
-	Name      string                       `json:"name,omitempty"`
-	Namespace string                       `json:"namespace,omitempty"`
+	// Kind of the Deployment Stack Source Reference
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Enum=GitRepository
+	Kind string `json:"kind,omitempty"`
+
+	// Name of the Deployment Stack Source Reference
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:MinLength=1
+	// +kubebuilder:validation:MaxLength=64
+	Name string `json:"name,omitempty"`
+
+	// Namespace of the Deployment Stack Source Reference
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:MinLength=1
+	// +kubebuilder:validation:MaxLength=64
+	Namespace string `json:"namespace,omitempty"`
 }
 
 // DeploymentStackSpec defines the desired state of DeploymentStack
 type DeploymentStackSpec struct {
-	Name          string                      `json:"stackName,omitempty"`
-	Scope         DeploymentStackScope        `json:"deploymentScope,omitempty"`
-	Location      string                      `json:"location,omitempty"`
-	Template      string                      `json:"templatePath,omitempty"`
-	DenySettings  DeploymentStackDenySettings `json:"denySettingsMode,omitempty"`
-	SourceRef     DeploymentStackSourceRef    `json:"sourceRef,omitempty"`
-	Interval      string                      `json:"interval,omitempty"`
-	RetryInterval string                      `json:"retryInterval,omitempty"`
+	// Name of the Deployment Stack
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:MinLength=1
+	// +kubebuilder:validation:MaxLength=64
+	Name string `json:"stackName"`
+
+	// Scope of the Deployment Stack
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Enum=ManagementGroup;Subscription;ResourceGroup
+	Scope string `json:"deploymentScope"`
+
+	// Location of the Deployment Stack
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:MinLength=1
+	// +kubebuilder:validation:MaxLength=64
+	Location string `json:"location"`
+
+	// Template of the Deployment Stack// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:MinLength=1
+	// +kubebuilder:validation:MaxLength=64
+	Template string `json:"templatePath"`
+
+	// Template Spec of the Deployment Stack
+	// TODO: Not implemented yet
+	TemplateSpec string `json:"templateSpec,omitempty"`
+
+	// Management Group ID of the Deployment Stack
+	ManagementGroupId string `json:"managementGroupId,omitempty"`
+
+	// Subscription ID of the Deployment Stack
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:MinLength=1
+	// +kubebuilder:validation:MaxLength=32
+	SubscriptionId string `json:"subscriptionId,omitempty"`
+
+	// Resource Group ID of the Deployment Stack
+	ResourceGroupName string `json:"resourceGroupId,omitempty"`
+
+	// Deny Settings Mode of the Deployment Stack
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Enum=None;DenyDelete;DenyWriteAndDelete
+	DenySettings string `json:"denySettingsMode"`
+
+	// Delete Resources of the Deployment Stack
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Enum=true;false
+	DeleteResources bool `json:"deleteResources,omitempty"`
+
+	// Delete Resource Groups of the Deployment Stack
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Enum=true;false
+	DeleteResourceGroups bool `json:"deleteResourceGroups,omitempty"`
+
+	// Source Reference of the Deployment Stack
+	SourceRef DeploymentStackSourceRef `json:"sourceRef"`
+
+	// Interval of the Deployment Stack
+	Interval string `json:"interval,omitempty"`
+
+	// Retry Interval of the Deployment Stack
+	RetryInterval string `json:"retryInterval,omitempty"`
 }
 
 // DeploymentStackStatus defines the observed state of DeploymentStack
-type DeploymentStackStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
-}
+type DeploymentStackStatus struct{}
 
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status

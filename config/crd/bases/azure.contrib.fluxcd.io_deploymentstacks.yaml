@@ -34,36 +34,94 @@ spec:
           spec:
             description: DeploymentStackSpec defines the desired state of DeploymentStack
             properties:
+              deleteResourceGroups:
+                description: Delete Resource Groups of the Deployment Stack
+                enum:
+                - true
+                - false
+                type: boolean
+              deleteResources:
+                description: Delete Resources of the Deployment Stack
+                enum:
+                - true
+                - false
+                type: boolean
               denySettingsMode:
-                description: DeploymentStackDenySettingMode defines the desired deny
-                  setting mode of DeploymentStack
+                description: Deny Settings Mode of the Deployment Stack
+                enum:
+                - None
+                - DenyDelete
+                - DenyWriteAndDelete
                 type: string
               deploymentScope:
-                description: DeploymentStackScope defines the desired scope of DeploymentStack
+                description: Scope of the Deployment Stack
+                enum:
+                - ManagementGroup
+                - Subscription
+                - ResourceGroup
                 type: string
               interval:
+                description: Interval of the Deployment Stack
                 type: string
               location:
+                description: Location of the Deployment Stack
+                maxLength: 64
+                minLength: 1
+                type: string
+              managementGroupId:
+                description: Management Group ID of the Deployment Stack
+                type: string
+              resourceGroupId:
+                description: Resource Group ID of the Deployment Stack
                 type: string
               retryInterval:
+                description: Retry Interval of the Deployment Stack
                 type: string
               sourceRef:
-                description: DeploymentStackSourceRef defines the desired source reference
-                  of DeploymentStack
+                description: Source Reference of the Deployment Stack
                 properties:
                   kind:
-                    description: DeploymentStackSourceRefKind defines the desired
-                      source reference kind of DeploymentStack
+                    description: Kind of the Deployment Stack Source Reference
+                    enum:
+                    - GitRepository
                     type: string
                   name:
+                    description: Name of the Deployment Stack Source Reference
+                    maxLength: 64
+                    minLength: 1
                     type: string
                   namespace:
+                    description: Namespace of the Deployment Stack Source Reference
+                    maxLength: 64
+                    minLength: 1
                     type: string
                 type: object
               stackName:
+                description: Name of the Deployment Stack
+                maxLength: 64
+                minLength: 1
+                type: string
+              subscriptionId:
+                description: Subscription ID of the Deployment Stack
+                maxLength: 32
+                minLength: 1
                 type: string
               templatePath:
+                description: Template of the Deployment Stack// +kubebuilder:validation:Required
+                maxLength: 64
+                minLength: 1
                 type: string
+              templateSpec:
+                description: 'Template Spec of the Deployment Stack TODO: Not implemented
+                  yet'
+                type: string
+            required:
+            - denySettingsMode
+            - deploymentScope
+            - location
+            - sourceRef
+            - stackName
+            - templatePath
             type: object
           status:
             description: DeploymentStackStatus defines the observed state of DeploymentStack
