@@ -35,18 +35,21 @@ spec:
             description: DeploymentStackSpec defines the desired state of DeploymentStack
             properties:
               deleteResourceGroups:
+                default: "true"
                 description: Delete Resource Groups of the Deployment Stack
                 enum:
                 - true
                 - false
                 type: boolean
               deleteResources:
+                default: "true"
                 description: Delete Resources of the Deployment Stack
                 enum:
                 - true
                 - false
                 type: boolean
               denySettingsMode:
+                default: None
                 description: Deny Settings Mode of the Deployment Stack
                 enum:
                 - None
@@ -61,6 +64,7 @@ spec:
                 - ResourceGroup
                 type: string
               interval:
+                default: 1h
                 description: Interval of the Deployment Stack
                 type: string
               location:
@@ -75,8 +79,23 @@ spec:
                 description: Resource Group ID of the Deployment Stack
                 type: string
               retryInterval:
+                default: 5m
                 description: Retry Interval of the Deployment Stack
                 type: string
+              secretRef:
+                description: Secret Reference of the Deployment Stack
+                properties:
+                  name:
+                    description: Name of the Deployment Stack Secret Reference
+                    maxLength: 64
+                    minLength: 1
+                    type: string
+                  namespace:
+                    description: Namespace of the Deployment Stack Secret Reference
+                    maxLength: 64
+                    minLength: 1
+                    type: string
+                type: object
               sourceRef:
                 description: Source Reference of the Deployment Stack
                 properties:
@@ -107,16 +126,11 @@ spec:
                 minLength: 1
                 type: string
               templatePath:
-                description: Template of the Deployment Stack// +kubebuilder:validation:Required
+                description: TemplatePath of the Deployment Stack
                 maxLength: 64
                 minLength: 1
                 type: string
-              templateSpec:
-                description: 'Template Spec of the Deployment Stack TODO: Not implemented
-                  yet'
-                type: string
             required:
-            - denySettingsMode
             - deploymentScope
             - location
             - sourceRef
