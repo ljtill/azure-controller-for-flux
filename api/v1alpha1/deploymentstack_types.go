@@ -33,18 +33,37 @@ type DeploymentStackSourceRef struct {
 	// Kind of the Deployment Stack Source Reference
 	// +kubebuilder:validation:Required
 	// +kubebuilder:validation:Enum=GitRepository
+	// +required
 	Kind string `json:"kind,omitempty"`
 
 	// Name of the Deployment Stack Source Reference
 	// +kubebuilder:validation:Required
 	// +kubebuilder:validation:MinLength=1
 	// +kubebuilder:validation:MaxLength=64
+	// +required
 	Name string `json:"name,omitempty"`
 
 	// Namespace of the Deployment Stack Source Reference
 	// +kubebuilder:validation:Required
 	// +kubebuilder:validation:MinLength=1
 	// +kubebuilder:validation:MaxLength=64
+	// +optional
+	Namespace string `json:"namespace,omitempty"`
+}
+
+type DeploymentStackSecretRef struct {
+	// Name of the Deployment Stack Secret Reference
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:MinLength=1
+	// +kubebuilder:validation:MaxLength=64
+	// +required
+	Name string `json:"name,omitempty"`
+
+	// Namespace of the Deployment Stack Secret Reference
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:MinLength=1
+	// +kubebuilder:validation:MaxLength=64
+	// +optional
 	Namespace string `json:"namespace,omitempty"`
 }
 
@@ -54,63 +73,85 @@ type DeploymentStackSpec struct {
 	// +kubebuilder:validation:Required
 	// +kubebuilder:validation:MinLength=1
 	// +kubebuilder:validation:MaxLength=64
+	// +required
 	Name string `json:"stackName"`
 
 	// Scope of the Deployment Stack
 	// +kubebuilder:validation:Required
 	// +kubebuilder:validation:Enum=ManagementGroup;Subscription;ResourceGroup
+	// +required
 	Scope string `json:"deploymentScope"`
 
 	// Location of the Deployment Stack
 	// +kubebuilder:validation:Required
 	// +kubebuilder:validation:MinLength=1
 	// +kubebuilder:validation:MaxLength=64
+	// +required
 	Location string `json:"location"`
-
-	// Template of the Deployment Stack// +kubebuilder:validation:Required
-	// +kubebuilder:validation:Required
-	// +kubebuilder:validation:MinLength=1
-	// +kubebuilder:validation:MaxLength=64
-	Template string `json:"templatePath"`
 
 	// Template Spec of the Deployment Stack
 	// TODO: Not implemented yet
-	TemplateSpec string `json:"templateSpec,omitempty"`
+	// TemplateSpec string `json:"templateSpec,omitempty"`
 
 	// Management Group ID of the Deployment Stack
+	// +optional
 	ManagementGroupId string `json:"managementGroupId,omitempty"`
 
 	// Subscription ID of the Deployment Stack
 	// +kubebuilder:validation:Required
 	// +kubebuilder:validation:MinLength=1
 	// +kubebuilder:validation:MaxLength=32
+	// +optional
 	SubscriptionId string `json:"subscriptionId,omitempty"`
 
 	// Resource Group ID of the Deployment Stack
+	// +optional
 	ResourceGroupName string `json:"resourceGroupId,omitempty"`
+
+	// TemplatePath of the Deployment Stack
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:MinLength=1
+	// +kubebuilder:validation:MaxLength=64
+	// +required
+	TemplatePath string `json:"templatePath"`
 
 	// Deny Settings Mode of the Deployment Stack
 	// +kubebuilder:validation:Required
 	// +kubebuilder:validation:Enum=None;DenyDelete;DenyWriteAndDelete
+	// +kubebuilder:default="None"
+	// +optional
 	DenySettings string `json:"denySettingsMode"`
 
 	// Delete Resources of the Deployment Stack
 	// +kubebuilder:validation:Required
 	// +kubebuilder:validation:Enum=true;false
+	// +kubebuilder:default="true"
+	// +optional
 	DeleteResources bool `json:"deleteResources,omitempty"`
 
 	// Delete Resource Groups of the Deployment Stack
 	// +kubebuilder:validation:Required
 	// +kubebuilder:validation:Enum=true;false
+	// +kubebuilder:default="true"
+	// +optional
 	DeleteResourceGroups bool `json:"deleteResourceGroups,omitempty"`
 
 	// Source Reference of the Deployment Stack
+	// +required
 	SourceRef DeploymentStackSourceRef `json:"sourceRef"`
 
+	// Secret Reference of the Deployment Stack
+	// +optional
+	SecretRef DeploymentStackSecretRef `json:"secretRef,omitempty"`
+
 	// Interval of the Deployment Stack
+	// +kubebuilder:default="1h"
+	// +optional
 	Interval string `json:"interval,omitempty"`
 
 	// Retry Interval of the Deployment Stack
+	// +kubebuilder:default="5m"
+	// +optional
 	RetryInterval string `json:"retryInterval,omitempty"`
 }
 
