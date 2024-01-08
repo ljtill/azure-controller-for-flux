@@ -4,6 +4,7 @@
     "features": {
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
         "ghcr.io/devcontainers/features/go:1": {},
+        "ghcr.io/devcontainers/features/azure-cli:1": {},
         "ghcr.io/ljtill/features/kind:1": {},
         "ghcr.io/ljtill/features/kubebuilder:1": {},
         "ghcr.io/ljtill/features/kubectl:1": {},
