@@ -40,14 +40,14 @@ spec:
             description: DeploymentStackSpec defines the desired state of DeploymentStack
             properties:
               deleteResourceGroups:
-                default: "true"
+                default: true
                 description: Delete Resource Groups of the Deployment Stack
                 enum:
                 - true
                 - false
                 type: boolean
               deleteResources:
-                default: "true"
+                default: true
                 description: Delete Resources of the Deployment Stack
                 enum:
                 - true

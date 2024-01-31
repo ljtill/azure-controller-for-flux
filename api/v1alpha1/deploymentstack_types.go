@@ -125,14 +125,14 @@ type DeploymentStackSpec struct {
 	// Delete Resources of the Deployment Stack
 	// +kubebuilder:validation:Required
 	// +kubebuilder:validation:Enum=true;false
-	// +kubebuilder:default="true"
+	// +kubebuilder:default=true
 	// +optional
 	DeleteResources bool `json:"deleteResources,omitempty"`
 
 	// Delete Resource Groups of the Deployment Stack
 	// +kubebuilder:validation:Required
 	// +kubebuilder:validation:Enum=true;false
-	// +kubebuilder:default="true"
+	// +kubebuilder:default=true
 	// +optional
 	DeleteResourceGroups bool `json:"deleteResourceGroups,omitempty"`
 
